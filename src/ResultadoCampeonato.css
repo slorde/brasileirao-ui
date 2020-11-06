@@ -1,0 +1,23 @@
+th {
+    width:150px;
+    background-color: 4080bf;
+}
+
+table, th, td,tr {
+    border: 2px solid black;
+}
+
+.all {
+    display: flex;
+    align-items: left;
+    width: 100%;
+    height: 100%;
+}
+
+.ano {
+    font-weight: 700;
+}
+
+.comp {
+    margin-top: 50px;
+}
