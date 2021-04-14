@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.Login {
+  margin-left: 15px;
+  max-width: 200px;
+  
+}
+
+.Comp {
+  margin-left: 15px;
+  max-width: 300px;
+}
+
+.ResultadoNome {
+  width: 100%;
+}
+
+
+.ErrorMessage {
+  color: red;
+  font-size: 12px;
+}
