@@ -17,7 +17,7 @@ class Competicoes extends Component {
         const auth = reactLocalStorage.get('BR_SESSION_AUTH');
 
         try {
-            axios.get(`${this.host}/competicao/${this.ano}/resultados`, { headers: { Authorization: auth }})
+            axios.get(`${this.host}/competicoes/${this.ano}/resultados`, { headers: { Authorization: auth }})
             .then((response) => {
                 this.setState({competicao: response.data});
                })

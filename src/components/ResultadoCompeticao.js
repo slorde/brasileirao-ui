@@ -13,14 +13,14 @@ class ResultadoCompeticao extends Component {
         const listaParticipantes = participantes.map(participante => {
             const participantTheme = participantes.findIndex(p => p.id === participante.id) === 0 ? winnerTheme : 'dark';
 
-            return  <ListGroup  className="ResultadoNome" key={participante.id} horizontal>
-            <ListGroup.Item  className="ResultadoNome" variant={participantTheme}>{participante.nome}</ListGroup.Item>
-            <ListGroup.Item className="ResultadoPontuacao" variant={participantTheme}>{participante.pontuacao}</ListGroup.Item>
+            return  <ListGroup className="ResultadoNome" key={participante.id} horizontal>
+            <ListGroup.Item className="ResultadoNome" key={participante.nome} variant={participantTheme}>{participante.nome}</ListGroup.Item>
+            <ListGroup.Item className="ResultadoPontuacao" key={participante.pontuacao} variant={participantTheme}>{participante.pontuacao}</ListGroup.Item>
             </ListGroup>
         });
 
         return <ListGroup  key={id}>
-            <ListGroup.Item variant="success">{ano}</ListGroup.Item>
+            <ListGroup.Item variant="success" key="header">{ano}</ListGroup.Item>
             {listaParticipantes}
         </ListGroup>
     };

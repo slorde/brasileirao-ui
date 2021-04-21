@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import { Form } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { reactLocalStorage } from 'reactjs-localstorage';
 import axios from 'axios';
 import ResultadoCompeticao from './ResultadoCompeticao'
+import {withRouter} from 'react-router-dom';
+
 
 class CompeticoesAtivas extends Component {
     constructor(props) {
@@ -27,15 +29,19 @@ class CompeticoesAtivas extends Component {
         }          
     };
 
+    nextPath(path) {
+        this.props.history.push(path);
+    }
 
     render() {
         const conteudo = this.state.competicoes.map(competicao => { 
             const link = competicao.iniciada ? 
-            <a href={`/competicoes/ano/${competicao.ano}`}>Detalhes</a> :
-            <a href={`/competicoes/${competicao.id}/edit`}>Editar resultado</a>
+            <Button onClick={() => this.nextPath(`/competicoes/ano/${competicao.ano}`)}>Detalhes</Button> :
+            <Button onClick={() => this.nextPath(`/competicoes/${competicao.id}/edit`)}>Editar resultado</Button>
             
-            return <div>
-                <ResultadoCompeticao key={competicao.id} competicao={competicao}/>
+            return <div key={competicao.id}>
+                <ResultadoCompeticao  competicao={competicao}/>
+                <br/>
                 {link}
                 </div>
         });
@@ -46,9 +52,8 @@ class CompeticoesAtivas extends Component {
             <Form>
                 {conteudo}
             </Form>
-        
       </div>
     };
 }
 
-export default CompeticoesAtivas;
+export default withRouter(CompeticoesAtivas);

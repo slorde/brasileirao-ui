@@ -43,6 +43,14 @@ code {
   vertical-align: top;
 }
 
+.ButtonRight {
+  float: right;
+}
+
+.NavLink {
+  color:white;
+}
+
 .ErrorMessage {
   color: red;
   font-size: 12px;

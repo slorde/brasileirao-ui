@@ -69,7 +69,6 @@ class Competicoes extends Component {
           return;
         }
     
-        console.log(this);
         const classificacoes = reorder(
           this.state.classificacoes,
           result.source.index,
@@ -84,8 +83,6 @@ class Competicoes extends Component {
 
       async handleClick() {
         const auth = reactLocalStorage.get('BR_SESSION_AUTH');
-        console.log(auth);
-
         this.setState({ mensagemSucesso: ''});
         const classificacoes = this.state.classificacoes;
         const novaClassificacao = classificacoes.map(classificacao => {
