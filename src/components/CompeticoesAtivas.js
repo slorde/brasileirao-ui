@@ -29,9 +29,18 @@ class CompeticoesAtivas extends Component {
 
 
     render() {
-        const conteudo = this.state.competicoes.map(competicao => {
-            return <ResultadoCompeticao key={competicao.id} competicao={competicao}/>
-        })
+        const conteudo = this.state.competicoes.map(competicao => { 
+            const link = competicao.iniciada ? 
+            <a href={`/competicoes/ano/${competicao.ano}`}>Detalhes</a> :
+            <a href={`/competicoes/${competicao.id}/edit`}>Editar resultado</a>
+            
+            return <div>
+                <ResultadoCompeticao key={competicao.id} competicao={competicao}/>
+                {link}
+                </div>
+        });
+
+
         return <div key="compativa" className="Comp">
             <p>Em andamento</p>
             <Form>

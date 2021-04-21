@@ -2,13 +2,12 @@ import React from "react";
 import {
   useParams
 } from "react-router-dom";
-import DetalhesResultados from '../components/DetalheResultado';
+import EditResultados from '../components/EditResultados';
 
 const CompeticoesScreen = () => {
-  const { ano } = useParams();
-
+  const { id } = useParams();
   return <div>
-  <DetalhesResultados ano={ano}/>
+  <EditResultados id={id}/>
 </div> 
 }
 

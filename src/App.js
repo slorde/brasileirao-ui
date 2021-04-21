@@ -4,6 +4,7 @@ import NavBar from './components/NavBar'
 import LoginScreen from './screens/LoginScreen'
 import CompeticoesScreen from './screens/CompeticoesScreen'
 import ResultadoScreen from './screens/ResultadoScreen.js'
+import EditResultadoScreen from './screens/EditResultadoScreen'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
@@ -13,7 +14,10 @@ function App() {
           <div>
             <NavBar/>
             <Switch>
-            <Route path="/competicoes/ano/:ano">
+              <Route path="/competicoes/:id/edit">
+                <EditResultadoScreen/>
+              </Route>
+              <Route path="/competicoes/ano/:ano">
                 <ResultadoScreen/>
               </Route>
               <Route path="/competicoes">

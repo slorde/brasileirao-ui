@@ -27,6 +27,21 @@ code {
   width: 100%;
 }
 
+.TableTitle {
+  background-color: black;
+  color: white;
+  width: 100%;
+  font-weight: bold;
+  text-align: center;
+}
+
+.Edit {
+  margin: 0 auto;
+}
+
+.ColumnTop {
+  vertical-align: top;
+}
 
 .ErrorMessage {
   color: red;
