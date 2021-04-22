@@ -107,6 +107,8 @@ class Competicoes extends Component {
           console.log('error geral', error);
         }
       }
+
+     
     render() {
        return <div className="Edit">
          <table>
@@ -133,7 +135,10 @@ class Competicoes extends Component {
                                     provided.draggableProps.style
                                 )}
                                 >
-                                {item.equipe}
+                                <table>
+                                  <td width="25px"><strong>{(index + 1)}</strong></td>
+                                  <td>{item.equipe}</td>
+                                </table>
                                 </div>
                             )}
                             </Draggable>

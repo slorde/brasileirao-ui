@@ -16,8 +16,17 @@ export default function Login() {
     function validateForm() {
       return login.length > 0 && password.length > 0;
     }
+
+    const onKeyUp = (event) => {
+      if (event.key === "Enter") {
+        handleClick();
+      }
+  }
   
     const handleClick = async () => {
+      if (isFetching)
+        return;
+
       try {
         setIsFetching(true);
         setErrorMessage(false);
@@ -50,6 +59,7 @@ export default function Login() {
             <Form.Control
               autoFocus
               value={login}
+              onKeyPress={onKeyUp}
               onChange={(e) => setLogin(e.target.value)}
             />
           </Form.Group>
@@ -58,10 +68,11 @@ export default function Login() {
             <Form.Control
               type="password"
               value={password}
+              onKeyPress={onKeyUp}
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
-          <Button type="button" disabled={!validateForm()} onClick={handleClick}>
+          <Button type="button" disabled={!validateForm()} onKeyPress={onKeyUp} onClick={handleClick}>
             {isFetching ? 'Enviando': 'Login'}
           </Button>
           <Form.Label className="ErrorMessage">{errorMessage ?'Login ou Senha Incorretos': ''}</Form.Label>
