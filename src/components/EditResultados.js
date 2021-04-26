@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { reactLocalStorage } from 'reactjs-localstorage';
 import axios from 'axios';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { Button } from 'react-bootstrap';
+import { Button, Spinner } from 'react-bootstrap';
 
 const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
@@ -37,7 +37,7 @@ const reorder = (list, startIndex, endIndex) => {
 class Competicoes extends Component {
     constructor(props) {
         super();
-        this.state = { resultado: {}, classificacoes:[], mensagemSucesso: '' }
+        this.state = { resultado: {}, classificacoes:[], mensagemSucesso: '', isFetching: false }
         this.id = props.id;
         const { REACT_APP_BRASILEIRO_API } = process.env;
         this.host = REACT_APP_BRASILEIRO_API;
@@ -49,15 +49,17 @@ class Competicoes extends Component {
     componentDidMount() {
         const auth = reactLocalStorage.get('BR_SESSION_AUTH');
         try {
+            this.setState({ isFetching: true });
             axios.get(`${this.host}/resultados/competicao/${this.id}/dono`, { headers: { Authorization: auth }})
             .then((response) => {
                 this.setState({resultado: response.data});
 
                 const classificacoes = response.data.classificacoes ? response.data.classificacoes : [];
-                this.setState({ classificacoes });                
+                this.setState({ classificacoes, isFetching: false });                
                })
             .catch((error) => {
-            console.log(error);
+              this.setState({ isFetching: false });
+              console.log(error);
             });
         } catch(error) {
             console.log(error);
@@ -110,7 +112,9 @@ class Competicoes extends Component {
 
      
     render() {
-       return <div className="Edit">
+      const loading = <Spinner animation="border" />
+
+       const conteudo = 
          <table>
            <tbody>
               <tr>
@@ -161,7 +165,9 @@ class Competicoes extends Component {
               </tr>
             </tbody>
           </table>
-       </div>
+      
+
+       return <div className="Edit"> {this.state.isFetching ? loading : conteudo}  </div>
     };
 }
 
