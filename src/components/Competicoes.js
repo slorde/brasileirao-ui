@@ -35,7 +35,7 @@ class Competicoes extends Component {
         const conteudo = this.state.competicoes.map(competicao => {
             return <ListGroup.Item 
             action 
-            key='123'
+            key={competicao}
             eventKey={competicao}
              href={`/competicoes/ano/${competicao}`}>
             {competicao}

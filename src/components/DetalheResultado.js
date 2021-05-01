@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { reactLocalStorage } from 'reactjs-localstorage';
-import { Table } from 'react-bootstrap';
+import { Table, Spinner } from 'react-bootstrap';
 import axios from 'axios';
 import ResultadoCompeticao from './ResultadoCompeticao';
 
 class Competicoes extends Component {
     constructor(props) {
         super();
-        this.state = { competicao: {} }
+        this.state = { competicao: {}, isFetching: false }
         this.ano = props.ano;
         const { REACT_APP_BRASILEIRO_API } = process.env;
         this.host = REACT_APP_BRASILEIRO_API;
@@ -17,12 +17,14 @@ class Competicoes extends Component {
         const auth = reactLocalStorage.get('BR_SESSION_AUTH');
 
         try {
+            this.setState({ isFetching: true });
             axios.get(`${this.host}/competicoes/${this.ano}/resultados`, { headers: { Authorization: auth }})
             .then((response) => {
-                this.setState({competicao: response.data});
+                this.setState({competicao: response.data, isFetching: false});
                })
             .catch((error) => {
-            console.log(error);
+                this.setState({ isFetching: false });
+                console.log(error);
             });
         } catch(error) {
             console.log(error);
@@ -31,6 +33,8 @@ class Competicoes extends Component {
 
 
     render() {
+        const loading = <Spinner animation="border" />
+
         const competicao = this.state.competicao;
         const resultados = competicao.resultados ? competicao.resultados: [];
       
@@ -68,7 +72,7 @@ class Competicoes extends Component {
        return <div>
            <div className="Comp">{resultado}</div>
            <br/>
-           {tabela}
+           {this.state.isFetching ? loading : tabela}
        </div>
     };
 }
