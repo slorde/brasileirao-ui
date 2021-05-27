@@ -55,3 +55,19 @@ code {
   color: red;
   font-size: 12px;
 }
+
+.hall {
+  padding-left: 200px;
+}
+
+.HallPontuacao {
+  width: 151px;
+}
+
+.HallCampeonatos {
+  width: 128px;
+}
+
+.HallNome {
+  width: 100px;
+}
