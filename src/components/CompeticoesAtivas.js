@@ -61,8 +61,7 @@ class CompeticoesAtivas extends Component {
         });
 
         const campeoes = this.state.dadosBobos
-            .sort(dados => dados.qtdCampeao)
-            .reverse()
+            .sort((a, b) => b.qtdCampeao - a.qtdCampeao)
             .map(campeao => {
             
                 const boboIndex = this.state.dadosBobos.findIndex(p => p.nome === campeao.nome);
