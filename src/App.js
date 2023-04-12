@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter , Switch, Route } from 'react-router-dom'
-import NavBar from './components/NavBar'
 import LoginScreen from './screens/LoginScreen'
 import CompeticoesScreen from './screens/CompeticoesScreen'
 import ResultadoScreen from './screens/ResultadoScreen.js'
@@ -12,7 +11,6 @@ function App() {
     <div className="App">
       <BrowserRouter>
           <div>
-            <NavBar/>
             <Switch>
               <Route path="/competicoes/:id/edit">
                 <EditResultadoScreen/>

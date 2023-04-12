@@ -7,19 +7,21 @@ class ResultadoCompeticao extends Component {
         this.competicao = props.competicao;
     }
     render() {
-        const { id, ano, finalizada, participantes } = this.competicao;
+        const { id, year: ano, finished: finalizada, participants: participantes } = this.competicao;
 
-        const winnerTheme = finalizada ? 'warning' : 'dark'; 
-        const listaParticipantes = participantes.map(participante => {
+        const winnerTheme = finalizada ? 'warning' : 'dark';
+        const listaParticipantes = participantes
+        .filter(p => p.playerName !== 'RESULTADO')
+        .map(participante => {
             const participantTheme = participantes.findIndex(p => p.id === participante.id) === 0 ? winnerTheme : 'dark';
 
-            return  <ListGroup className="ResultadoNome" key={participante.id} horizontal>
-            <ListGroup.Item className="ResultadoNome" key={participante.nome} variant={participantTheme}>{participante.nome}</ListGroup.Item>
-            <ListGroup.Item className="ResultadoPontuacao" key={participante.pontuacao} variant={participantTheme}>{participante.pontuacao}</ListGroup.Item>
+            return <ListGroup className="ResultadoNome" key={participante.id} horizontal>
+                <ListGroup.Item className="ResultadoNome" key={participante.playerName} variant={participantTheme}>{participante.playerName}</ListGroup.Item>
+                <ListGroup.Item className="ResultadoPontuacao" key={participante.score} variant={participantTheme}>{participante.score}</ListGroup.Item>
             </ListGroup>
         });
 
-        return <ListGroup  key={id}>
+        return <ListGroup key={id}>
             <ListGroup.Item variant="success" key="header">{ano}</ListGroup.Item>
             {listaParticipantes}
         </ListGroup>

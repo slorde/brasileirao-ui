@@ -15,17 +15,17 @@ class Competicoes extends Component {
         const auth = reactLocalStorage.get('BR_SESSION_AUTH');
         try {
             this.setState({ isFetching: true });
-            axios.get(`${this.host}/competicoes/anos`, { headers: { Authorization: auth }})
-            .then((response) => {
-              this.setState({ competicoes: response.data, isFetching: false });
-            })
-            .catch((error) => {
-              this.setState({ isFetching: false });
-              console.log(error);
-            });
-        } catch(error) {
-        console.log(error);
-        }          
+            axios.get(`${this.host}/api/competitions?type=finished`, { headers: { 'x-access-token': auth } })
+                .then((response) => {
+                    this.setState({ competicoes: response.data, isFetching: false });
+                })
+                .catch((error) => {
+                    this.setState({ isFetching: false });
+                    console.log(error);
+                });
+        } catch (error) {
+            console.log(error);
+        }
     };
 
 
@@ -33,22 +33,24 @@ class Competicoes extends Component {
         const loading = <Spinner animation="border" />
 
         const conteudo = this.state.competicoes.map(competicao => {
-            return <ListGroup.Item 
-            action 
-            key={competicao}
-            eventKey={competicao}
-             href={`/competicoes/ano/${competicao}`}>
-            {competicao}
+            const ano = competicao.year;
+            return <ListGroup.Item
+                action
+                key={ano}
+                eventKey={ano}
+                href={`/competicoes/ano/${ano}`}>
+                {ano}
             </ListGroup.Item>
         })
 
-        return <div className="Login">
+        return <div className="historico">
             <p>Histórico</p>
-            {this.state.isFetching ? loading : <div></div>}
-            <ListGroup defaultActiveKey="#link1">
-                {conteudo}
-            </ListGroup>        
-      </div>
+            {this.state.isFetching ? loading :
+                <ListGroup defaultActiveKey="#link1">
+                    {conteudo}
+                </ListGroup>
+            }
+        </div>
     };
 }
 
