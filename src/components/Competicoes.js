@@ -38,6 +38,7 @@ class Competicoes extends Component {
         .map(competicao => {
             const ano = competicao.year;
             return <ListGroup.Item
+                action
                 key={ano}
                 eventKey={ano}
                 onClick={() => {this.action(ano)}}>
