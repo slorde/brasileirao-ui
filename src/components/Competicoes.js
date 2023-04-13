@@ -9,6 +9,7 @@ class Competicoes extends Component {
         this.state = { competicoes: [], isFetching: false }
         const { REACT_APP_BRASILEIRO_API } = process.env;
         this.host = REACT_APP_BRASILEIRO_API;
+        this.action = props.click;
     }
 
     componentDidMount() {
@@ -35,10 +36,9 @@ class Competicoes extends Component {
         const conteudo = this.state.competicoes.map(competicao => {
             const ano = competicao.year;
             return <ListGroup.Item
-                action
                 key={ano}
                 eventKey={ano}
-                href={`/competicoes/ano/${ano}`}>
+                onClick={this.action(ano)}>
                 {ano}
             </ListGroup.Item>
         })

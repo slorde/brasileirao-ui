@@ -2,8 +2,14 @@ import React from "react";
 import Competicoes from "../components/Competicoes"
 import CompeticoesAtivas from "../components/CompeticoesAtivas"
 import Leaderboard from "../components/Leaderboard";
+import { useHistory } from "react-router-dom";
 
 const CompeticoesScreen = () => {
+  const history = useHistory();
+  const handleYearClick = (year) => {
+    history.replace(`/competicoes/ano/${year}`);
+  }
+
   return (
     <div key="compativa" className="Comp">
       <table className="comp-table">
@@ -13,7 +19,7 @@ const CompeticoesScreen = () => {
               <CompeticoesAtivas />
             </td>
             <td>
-              <Competicoes />
+              <Competicoes click={handleYearClick}/>
             </td>
             <td>
               <Leaderboard />
