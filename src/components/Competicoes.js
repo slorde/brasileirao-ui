@@ -33,12 +33,14 @@ class Competicoes extends Component {
     render() {
         const loading = <Spinner animation="border" />
 
-        const conteudo = this.state.competicoes.map(competicao => {
+        const conteudo = this.state.competicoes
+        .sort((a,b) => b.year-a.year)
+        .map(competicao => {
             const ano = competicao.year;
             return <ListGroup.Item
                 key={ano}
                 eventKey={ano}
-                onClick={this.action(ano)}>
+                onClick={() => {this.action(ano)}}>
                 {ano}
             </ListGroup.Item>
         })
