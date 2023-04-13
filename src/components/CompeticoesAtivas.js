@@ -36,7 +36,6 @@ class CompeticoesAtivas extends Component {
         const loading = <Spinner animation="border" />
 
         const conteudo = this.state.competicoes.map(competicao => {
-            console.log(competicao);
             const link = competicao.started ?
                 <Button onClick={() => this.nextPath(`/competicoes/ano/${competicao.year}`)}>Detalhes</Button> :
                 <Button onClick={() => this.nextPath(`/competicoes/${competicao.id}/edit`)}>Editar resultado</Button>

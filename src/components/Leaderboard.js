@@ -33,13 +33,12 @@ class LeaderBoard extends Component {
             .map(campeao => {
                 const boboIndex = this.state.leaderboard.findIndex(p => p.player === campeao.player);
                 const theme = boboIndex === 0 ? 'warning' : (boboIndex === 3 ? 'danger' : 'dark');
-console.log(campeao);
                 return <ListGroup key={campeao.player} horizontal>
                     <ListGroup.Item className="HallNome" key={campeao.player} variant={theme}>{campeao.player}</ListGroup.Item>
                     <ListGroup.Item className="HallCampeonatos" key={campeao.winNumbers} variant={theme}>{campeao.winNumbers}</ListGroup.Item>
                 </ListGroup>
             });
-console.log('campeoes', campeoes);
+
         const campeoesHeader = <ListGroup key={'header'} horizontal>
             <ListGroup.Item className="HallNome" key='headernome' variant='success'>Nome</ListGroup.Item>
             <ListGroup.Item className="HallCampeonatos" key='headercampeao' variant='success'>campeonatos</ListGroup.Item>

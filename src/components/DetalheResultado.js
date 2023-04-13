@@ -22,7 +22,6 @@ class Competicoes extends Component {
             axios.get(`${this.host}/api/competitions?type=started&year=${this.ano}`,
                 { headers: { 'x-access-token': auth } })
                 .then((response) => {
-                    console.log('response', response.data);
                     this.setState({ competicoes: response.data, isFetching: false });
                 })
                 .catch((error) => {
@@ -37,10 +36,8 @@ class Competicoes extends Component {
 
     render() {
         const loading = <Spinner animation="border" />;
-        console.log(this.state.competicoes);
         const tabela = this.state.competicoes.map(competicao => {
             const resultTable = competicao.participants.map(p => {
-                console.log(p.playerName, p.results);
                 const results = p.results
                     .sort((a, b) => a.team.localeCompare(b.team))
                     .map((r) => {
@@ -49,7 +46,7 @@ class Competicoes extends Component {
                             <td>{r.team}</td>
                         </tr>
                     })
-                console.log(p.results);
+
                 return <div>
                     <div className="TableTitle">{p.playerName}</div>
                     <Table striped bordered hover size="sm" variant="dark">
