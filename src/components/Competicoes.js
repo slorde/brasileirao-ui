@@ -16,7 +16,7 @@ class Competicoes extends Component {
         const auth = reactLocalStorage.get('BR_SESSION_AUTH');
         try {
             this.setState({ isFetching: true });
-            axios.get(`${this.host}/api/competitions?type=finished`, { headers: { 'x-access-token': auth } })
+            axios.get(`${this.host}/api/competitions?type=finishedYears`, { headers: { 'x-access-token': auth } })
                 .then((response) => {
                     this.setState({ competicoes: response.data, isFetching: false });
                 })
