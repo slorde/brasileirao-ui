@@ -76,6 +76,7 @@ export default function Login() {
 
   return (
     <div className="Login">
+      <p>Primeiro login pode demorar pra subir o server, paciencia galera</p>
       <label>Login</label>
       <input className="login-input" onKeyPress={onKeyUp} value={login} onChange={(e) => setLogin(e.target.value)}></input>
       <label>Password</label>
