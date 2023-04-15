@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
@@ -22,6 +22,30 @@ export default function Login() {
       handleClick();
     }
   }
+
+  useEffect(() => {
+    const auth = reactLocalStorage.get('BR_SESSION_AUTH');
+    if (auth) {
+      axios.get(`${REACT_APP_BRASILEIRO_API}/api/users/check`,
+        { headers: { 'x-access-token': auth } })
+        .then((response) => {
+          if (response.status === 204)
+            history.replace('/competicoes')
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+
+    axios.post(`${REACT_APP_BRASILEIRO_API}/api/competitions/update`,
+      { headers: { 'x-access-token': auth } })
+      .then(() => {
+        console.log('update ok');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  })
 
   const handleClick = async () => {
     if (isFetching)
@@ -62,7 +86,7 @@ export default function Login() {
         onClick={handleClick}>
         {isFetching ? 'Enviando' : 'Login'}
       </Button>
-      <label className="ErrorMessage">{errorMessage ? errorMessage: ''}</label>
+      <label className="ErrorMessage">{errorMessage ? errorMessage : ''}</label>
     </div>
   );
 }
